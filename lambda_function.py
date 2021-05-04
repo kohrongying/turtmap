@@ -86,7 +86,7 @@ class Map:
         im_file = BytesIO()
         im.save(im_file, format="JPEG")
         im_bytes = im_file.getvalue()  # im_bytes: image in binary format.
-        return base64.b64encode(im_bytes)
+        return base64.b64encode(im_bytes).decode("utf-8")
 
     def show(self):
         im = self.generate_image()
@@ -95,7 +95,7 @@ class Map:
 
 def lambda_handler(event, context):
     params = event["queryStringParameters"]
-    print('params {params}')
+    print(f'params {params}')
 
     im = Map(north=params.get('north', '-'),
              south=params.get('south', '-'),
@@ -106,6 +106,6 @@ def lambda_handler(event, context):
     return {
         'statusCode': 200,
         'body': im.generate_base64_string(),
-        'headers': {'Content-Type': 'image/png'},
+        'headers': {'Content-Type': 'image/jpeg'},
         'isBase64Encoded': True
     }
