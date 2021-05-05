@@ -17,14 +17,13 @@ class Coordinate:
 
 
 class Map:
-    PADDING = Padding(120, 175)
-    RECT_WIDTH = 120
-    RECT_HEIGHT = 80
+    PADDING = Padding(x=120, y=120)
+    RECT_WIDTH = 170
+    RECT_HEIGHT = 100
     GRID_GAP = 30
     FILL_COLOR = "#ffffff"
     TEXT_COLOR = "#000000"
-    BASE_IMAGE_PATH = "map.png"
-    im = Image.open(BASE_IMAGE_PATH)
+    BASE_IMAGE_PATH = "./map.png"
 
     def __init__(self, north, south, east, west, central):
         self.data_values = {
@@ -40,7 +39,8 @@ class Map:
         return ImageFont.truetype("arial.ttf", font_size)
 
     def generate_bounding_boxes(self):
-        map_width, map_height = self.im.size
+        with Image.open(self.BASE_IMAGE_PATH) as im:
+            map_width, map_height = im.size
         north_box_1 = Coordinate(map_width / 2 - self.RECT_WIDTH / 2, self.PADDING.y)
         north_box_2 = Coordinate(north_box_1.x + self.RECT_WIDTH, north_box_1.y + self.RECT_HEIGHT)
 
@@ -74,9 +74,9 @@ class Map:
             second = bounding_coors[box][1]
             val = self.data_values[box]
             draw.rectangle([(first.x, first.y), (second.x, second.y)], fill=self.FILL_COLOR)
-            draw.text((first.x + self.RECT_WIDTH / 2, first.y + 30), anchor="mm", font=self.font(20), text=str(val),
+            draw.text((first.x + self.RECT_WIDTH / 2, first.y + 35), anchor="mm", font=self.font(35), text=str(val),
                       fill=self.TEXT_COLOR)
-            draw.text((first.x + self.RECT_WIDTH / 2, first.y + 55), anchor="mm", font=self.font(15), text=box.upper(),
+            draw.text((first.x + self.RECT_WIDTH / 2, first.y + 70), anchor="mm", font=self.font(25), text=box.upper(),
                       fill=self.TEXT_COLOR)
         return im
 
