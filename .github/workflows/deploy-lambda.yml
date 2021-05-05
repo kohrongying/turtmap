@@ -17,6 +17,7 @@ jobs:
           lambda_layer_arn: 'arn:aws:lambda:ap-southeast-1:163368111864:layer:PIL-layer'
           lambda_function_name: 'lambda-sg-hazy-bot-dynamic-map'
           lambda_layer_publish: false
+          exclude_files: .github terraform
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
