@@ -15,7 +15,7 @@ jobs:
         uses: kohrongying/py-lambda-action@v1.0.3
         with:
           lambda_layer_arn: 'arn:aws:lambda:ap-southeast-1:163368111864:layer:PIL-layer'
-          lambda_function_name: 'test'
+          lambda_function_name: 'lambda-sg-hazy-bot-dynamic-map'
           lambda_layer_publish: false
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
